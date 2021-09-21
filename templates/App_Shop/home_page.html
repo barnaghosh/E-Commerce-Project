@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% block css_block %}
+<style>
+    /* .slider-inner{
+      width: 30%;
+      border: 1px solid red;
+    }
+    .slider-inner img{
+      position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    } */
+</style>
+{% endblock %}
+{% block body_block %}
+<!-- <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div style="width: 100%;height: 300px;">
+            <img src="/media/Caurosel/ban1.jpg" class="d-block w-100 h-100" alt="...">
+        </div>
+        
+      </div>
+      <div class="carousel-item">
+        <div style="width: 100%;height: 300px;">
+            <img src="/media/Caurosel/ban2.jpg" class="d-block w-100 h-100 " alt="...">
+        </div>
+        
+      </div>
+      <div class="carousel-item">
+        <div style="width: 100%;height: 300px;">
+            <img src="/media/Caurosel/ban3.jpg" class="d-block w-100 h-100 " alt="...">
+        </div>
+        
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div> -->
+<div >
+  <!-- <div class="" >
+    <div style="width: 70%;height: 150px;margin: 0 auto;">
+        <img src="/media/Caurosel/banner1.png" width="100%" height="100%" alt="">
+    </div>
+    
+  </div> -->
+  <div class="container">
+    <div class="messages container ">
+      {% if messages %}
+      <div class="mt-2">
+        {% for message in messages %}
+          <div {% if message.tags %} class="alert alert-{{message.tags}}{% endif %}" role="alert">
+            {{message}} 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    
+
+  </div>
+
+  <div id="slider" class="nivoSlider"> 
+    <img src="/media/Caurosel/ban3.jpg" data-thumb="/media/Caurosel/ban3.jpg"  alt=""  /> 
+    <img src="/media/Caurosel/ban1.jpg" data-thumb="/media/Caurosel/ban1.jpg"  alt=""   />
+    <img src="/media/Caurosel/ban2.jpg" data-thumb="/media/Caurosel/ban2.jpg"  alt=""  data-transition="slideInLeft" /> 
+    <img src="/media/Caurosel/ban4.jpg" data-thumb="/media/Caurosel/ban4.jpg"  alt=""  /> 
+    </div>
+
+<div class="container" style="margin-top: 0px;">
+    
+    {% for cata in catagory %}
+    {% if cata.category.all %}
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-6">
+                <h2 style="color: black;" >{{cata.title}} </h2>
+            </div>
+            <div class="col-6">
+                {% if cata.category.count > 4 %}
+                    <p style="text-align: right;margin-bottom: 0px;"  ><a href="{% url 'App_Shop:also' pk=cata.pk %}" >Also see </a></p>
+                {% endif %}
+            </div>
+            
+        </div>
+        
+        <div class="row">
+          
+            
+            {% for  product in cata.category.all %}
+                {% if forloop.counter < 5 %}
+                <div class="col-md-6 col-sm-12 col-lg-3">
+                    <figure class="card card-product">
+                      <div class="img-wrap">
+                        <img src="/media/{{product.mainimage}}" style="width:100%; height:300px;">
+                      </div>
+                      <figcaption class="info-wrap">
+                        <h6 class="title"><a href="{% url 'App_Shop:product_detail' pk=product.pk %}">{{product.name}}</a></h6>
+              
+                        <div class="action-wrap">
+                          <p  style="color:grey;font-size: 13px;font-weight: bold;"> <span>seller name: </span> <span>{{product.seller}}</span> </p>
+                          <div class="price-wrap h5">
+                            <span class="price-new">&#2547; {{product.price|floatformat:2}}</span>
+                            <span class="price-old"><strike>&#2547; {{product.old_price|floatformat:2}}</strike></span>
+                          </div>
+                          {% if product.cupon_number %}
+                          <div class="price-wrap h5">
+                            <span class="price-new text-warning" >{{product.cupon_offer}}% Cupon Offer</span>
+                            
+                          </div>
+                          {% endif %}
+                        </div>
+                      </figcaption>
+                    </figure>
+                  </div>
+                {% endif %}
+                
+            {% endfor %}
+            
+          
+        </div>
+      </div>
+    {% endif %}
+    {% endfor %}
+</div>
+</div>
+<hr style="border-top: 0.5px solid gray;">
+<div style="background-color: white;padding: 30px;margin: 0px;">
+    <div class="row" style="margin: 0px;padding: 0px;" >
+        <div class="col-4">
+            <div class="row">
+                <div class="col-2">
+                    <i class="fa fa-tags fa-2x" aria-hidden="true"></i>
+                </div>
+                <div class="col-10">
+                    <div class="text">
+                        <p class="pt-0 h4">Get Product from the comfort of your home</p>
+                        <p class="tn">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut suscipit velit eos ad corrupti, eligendi, perspiciatis nemo doloribus nesciunt maiores voluptate iure labore facere dolorem deserunt amet provident blanditiis quos soluta vel rerum! Accusamus quisquam atque perspiciatis error reprehenderit animi.</p>
+                      </div>
+                </div>
+            </div>
+            <!-- #111827 -->
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <div class="col-2">
+                    <i class="fa fa-tags fa-2x" aria-hidden="true"></i>
+                </div>
+                <div class="col-10">
+                    <div class="text">
+                        <p class="pt-0 h4">All products related information at your fingertips</p>
+                        <p class="tn">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis aspernatur non nemo esse nulla obcaecati, minima dicta voluptatibus culpa facilis. Commodi laborum sint autem repellat expedita necessitatibus tempore fugiat reiciendis perferendis amet ipsa quas at, doloremque blanditiis rem magni soluta!</p>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row" >
+                <div class="col-2">
+                    <i class="fa fa-tags fa-2x" aria-hidden="true"></i>
+                </div>
+                <div class="col-10">
+                    <div class="text">
+                        <p class="pt-0 h4">Pay Securely</p>
+                        <p class="tn">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam quidem ex nihil error labore, laboriosam quibusdam ut inventore maxime, est nemo aut nam et fugit nobis quos, soluta minus odio ullam doloremque veritatis dicta saepe veniam cumque? Error, non ad?</p>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div style="background-color: white; margin: 0px;">
+    <hr style="border-top: 0.5px solid gray;">
+    <div class="row" style="padding: 0px; margin: 0px;">
+        <div class="col-12" style="text-align: center;">
+            <img src="/media/payment/1.png" alt="">
+            <img src="/media/payment/2.png" alt="">
+            <img src="/media/payment/3.png" alt="">
+            <img src="/media/payment/4.png" alt="">
+            <img src="/media/payment/5.png" alt="">
+            <img src="/media/payment/6.png" alt="">
+        </div>
+    </div>
+    <hr style="border-top: 0.5px solid gray;">
+</div>
+<footer class="p-4">
+<a href="test.html">Link</a>
+   </footer>
+{% endblock %}

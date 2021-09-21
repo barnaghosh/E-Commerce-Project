@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %}
+Edit Profile
+{% endblock %}
+{% block body_block %}
+<div class="container" style="margin: auto;" >
+    <form action="" method="POST" style="width: 70%; margin: 20px auto; background-color: whitesmoke;padding: 50px;" id="contact-form">
+      <h4 style="text-align:center;">Edit Profile</h4>
+        
+      {{form|crispy }}
+      {% csrf_token %}
+      <button type="submit"  class="btn btn-primary btn-md" >Profile</button>
+    </form>
+</div>
+{% endblock %}

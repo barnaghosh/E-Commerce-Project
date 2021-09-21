@@ -1,0 +1,117 @@
+<header style="position: sticky;top: 0;z-index: 10;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-12 col-12">
+                <div class="btn-group text-white">
+                    <!-- <button class="btn border dropdown-toggle my-md-4 my-2 text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USD</button>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">ERU-Euro</a>
+                    </div> -->
+                </div>
+                
+            </div>
+            <div class="col-md-4 col-12 text-center">
+                <h2 class="my-md-3 site-title " style="color: white;font-weight: bold;">E-Bazar</h2>
+            </div>
+            <div class="col-md-4 col-12 text-right">
+                {% if request.user.is_authenticated %}
+                <div class="btn-group text-white" style="font-size: 24px;">
+                    <a href="{% url 'App_Login:logout' %}" class="btn btn-sm border  my-md-4 my-2 text-white"  >Logout</a>
+                    
+                </div>
+                {% else %}
+                
+                <div class="btn-group text-white pr-3" style="font-size: 24px;">
+                    <button class="btn  border dropdown-toggle my-md-4 my-2 text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 18px;">Signup</button>
+                    <div class="dropdown-menu" style="font-size: 18px;">
+                        <a href="{% url 'App_Login:buyer_signup' %}" class="dropdown-item" style="font-style: 18px;">Buyer's Signup</a>
+                        <hr>
+                        <a href="{% url 'App_Login:seller_signup' %}" class="dropdown-item" style="font-style: 18px;">Seller's Signup</a>
+                    </div>
+                </div>
+                <div class="btn-group text-white" style="font-size: 24px;">
+                    <a href="{% url 'App_Login:login' %}" class="btn btn-sm border  my-md-4 my-2 text-white" style="font-size: 18px;"  >Signin</a>
+                    
+                </div>
+                {% endif %}
+            </div>
+        </div> 
+        
+    </div>
+    <div  >
+        <nav class="navbar navbar-expand-lg navbar-light bg-light " >
+            <a class="navbar-brand" href="{% url 'App_Login:home' %}">
+              <div style="width: 40px;">
+                <img src="/media/img/logo.png" class="w-100 h-100" alt="">
+              </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ">
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'App_Login:home' %}">HOME <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'App_Shop:products' %}">FEATURES</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'App_Shop:collection' %}">COLLECTION</a>
+                </li>
+                {% if user.buyer %}
+                <li class="nav-item">
+                  <a class="nav-link " href="{% url 'App_Order:cart' %}" >CART</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'App_Shop:about' %}" >ABOUT US</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'App_Shop:contact' %}" >CONTACT US</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link border btn dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none;color: #2b3032a1;"><i class="fas fa-user-tie "></i> {{request.user.username}}</a>
+                    <div class="dropdown-menu" aria-labelledby="nabbarDropdown">
+                      {% if user.is_buyer %}
+                      <a class="dropdown-item" href="{% url 'App_Payment:orders' %}">Orders</a>
+                      
+                      {% else %}
+                      <!-- <a class="dropdown-item" href="{% url 'App_Shop:catagory' %}">Add Product</a> -->
+                      
+                      <a class="dropdown-item" href="{% url 'App_Shop:add_another_product' %}">Add Product in Category</a>
+                      
+                      {% endif %}
+                      
+                      <a class="dropdown-item" href="{% url 'App_Login:edit_profile' %}">Profile</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'App_Login:logout' %}">Logout</a>
+                    </div>
+                  </li>
+                {% endif %}
+              </ul>
+            </div>
+            
+          
+            <div class="navbar-nav">
+              
+              {% if request.user.is_authenticated %}
+              {% if user.is_buyer %}
+              
+              <li class="nav-item border rounded-circle mx-2 search-icon">
+               <a href="{% url 'App_Order:cart' %}" style="color: black;"><i class="fa fa-shopping-basket p-2" aria-hidden="true"></i></a> 
+                
+              </li>
+              {% endif %}
+              {% endif %}
+              <!-- <li class="nav-item border rounded-circle mx-2 search-icon">
+                <a href="mailto:barnag119@gmail.com" style="color: black;"><i class="fa fa-envelope-o p-2" aria-hidden="true"></i></a>
+              </li> -->
+            </div>
+            
+            
+            
+          </nav>
+    </div>
+</header>

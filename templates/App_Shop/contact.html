@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block body_block %}
+<div class="container" style="margin: auto;" >
+    <form action="" method="POST" style="width: 70%; margin: 20px auto; background-color: whitesmoke;padding: 50px;" id="contact-form">
+      <h4 style="text-align:center;">Contact Form</h4>
+        <div class="form-group mx-4">
+            <label for="exampleFormControlInput1">Name</label>
+            <input type="text" class="form-control" id="conName" placeholder="Enter Your Name" required>
+          </div>
+          <div class="form-group mx-4">
+            <label for="exampleFormControlInput1">Email address</label>
+            <input type="email" class="form-control" id="conEmail" placeholder="name@example.com" required>
+          </div>
+          <div class="form-group mx-4">
+            <label for="exampleFormControlInput1">Subject</label>
+            <input type="text" class="form-control" id="conSub" placeholder="Subject" required>
+          </div>
+          <div class="form-group mx-4">
+            <label for="exampleFormControlInput1">Message</label>
+            <input type="text" class="form-control" id="conMsg" placeholder="Enter Your Msg" required>
+          </div>
+          <button class="btn btn-primary mx-4" onclick="sendMail()">Submit</button>
+    </form>
+</div>
+{% endblock %}

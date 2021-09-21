@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title_block %}
+Profile
+{% endblock %}
+{% block css_block %}
+<style>
+  .addCart {
+    background-color: var(--white);
+    /* border-radius: 50%; */
+    padding: 0.6rem 0.9rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(94, 54, 54, 0.1);
+    transition: all 300ms ease-in-out;
+  }
+    .img-container:hover {
+    box-shadow: 0px 0px 5px 2px black;
+  }
+  .addCart:hover{
+    
+    padding: 1rem 1.3rem;
+    background-color: black;
+  }
+  .addCart:hover a i{
+    /* border-radius: 10; */
+    background-color:var(light-gray);
+    color: white;
+  }
+  .product{
+    margin-bottom: 30px;
+  }
+  .pro-name{
+    text-decoration: none;
+    color: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+
+  }
+  .price{
+    font-size: 20px;
+    color: brown;
+  }
+  @media  only screen and (min-width:768px) {
+    .col-1-of-4 .side{
+      position: fixed;
+    }
+    .side .side-form{
+      margin-top: 40px;
+    }
+  }
+</style>
+{% endblock %}
+{% block body_block %}
+  <section class="section products " style="margin-top: 30px; margin-bottom: 40px;">
+    <div class="products-layout container">
+      <div class="col-1-of-4">
+        <div class="side" >
+          <div class="block-title">
+            <h5 style="font-style: oblique;font-weight: 900;" >Category</h5>
+          </div>
+
+          <form action="" method="GET" class="side-form">
+            <ul class="block-content" style="list-style-type: none;">
+              <li>
+                <input type="checkbox" name="watch" id="" value="Watch">
+                <label for="">
+                  <span>Watch</span>
+                  <!-- <small>(10)</small> -->
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" name="Shoe" id="" value="Shoes">
+                <label for="">
+                  <span>Shoe</span>
+                  <!-- <small>(10)</small> -->
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" name="Makeup" id="" value="Makeup">
+                <label for="">
+                  <span>Makeup Product</span>
+                  <!-- <small>(10)</small> -->
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" name="Leather Belts" id="" value="Leather Belts">
+                <label for="">
+                  <span>Leather Belts</span>
+                  <!-- <small>(10)</small> -->
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" name="Jama" id="" value="Jama">
+                <label for="">
+                  <span>Dress</span>
+                  <!-- <small>(10)</small> -->
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" name="Bag" id="">
+                <label for="">
+                  <span>Bag</span>
+                  <!-- <small>(7)</small> -->
+                </label>
+              </li>
+  
+              <li>
+                <input type="checkbox" name="Shirt" id="">
+                <label for="">
+                  <span> Shirt</span>
+                  <!-- <small>(3)</small> -->
+                </label>
+              </li>
+  
+              <li>
+                <input type="checkbox" name="Electronics Devices" id="">
+                <label for="">
+                  <span>Electronics Devices</span>
+                  <!-- <small>(3)</small> -->
+                </label>
+              </li>
+            </ul>
+            <button href="" type="submit" class="btn btn-info btn-sm">Apply</button>
+          </form>
+          
+        </div>
+      </div>
+      <div class="col-3-of-4">
+
+        <div class="product-layout row" >
+          {% if product_search %}
+          {% for product in product_search %}
+            <div class="product col-sm-12 col-md-4 col-lg-3 ">
+                <div class="img-container">
+                  <div class="pro-img" style="width: 100%;height: 200px;position: relative;">
+                    <img src="/media/{{product.mainimage}}" alt="" class="w-100 h-100" />
+                    {% if product.cupon_number %}
+                    <div class="cupon-offer px-3" style="position: absolute;top:0;right: 0; background-color: yellow;">
+                     <h6 style="color: black;">{{product.cupon_offer}}% OFFER </h6>
+                  </div>
+                  {% endif %}
+                  {% if user.is_buyer %}
+                    <div class="addCart rounded-circle" style="position: absolute;bottom:0;right: 0;">
+                      <a href="{% url 'App_Order:add' pk=product.pk %}" style="color: black;"><i class="fa fa-shopping-cart " style="font-size: 20px;"></i></a>
+                  </div>
+                  {% endif %}
+                  </div>
+                
+                
+
+                <!-- <ul class="side-icons">
+                    <span><i class="fas fa-search"></i></span>
+                </ul> -->
+                </div>
+                <div class="bottom">
+                <a href="{% url 'App_Shop:product_detail' pk=product.pk %}" class="pro-name">{{product.name}}</a>
+                <div class="price">
+                    <span>&#2547; {{product.price|floatformat:2}}</span>
+                </div>
+                </div>
+          </div>
+          {% endfor %}
+          {% else %}
+            {% for product in products %}
+            <div class="product col-sm-12 col-md-4 col-lg-3 ">
+                <div class="img-container">
+                  <div class="pro-img" style="width: 100%;height: 200px;position: relative;">
+                    <img src="/media/{{product.mainimage}}" alt="" class="w-100 h-100" />
+                    {% if product.cupon_number %}
+                    <div class="cupon-offer px-3" style="position: absolute;top:0;right: 0; background-color: yellow;">
+                     <h6 style="color: black;">{{product.cupon_offer}}% OFFER </h6>
+                  </div>
+                  {% endif %}
+                  {% if user.is_buyer %}
+                    <div class="addCart rounded-circle" style="position: absolute;bottom:0;right: 0;">
+                      <a href="{% url 'App_Order:add' pk=product.pk %}" style="color: black;"><i class="fa fa-shopping-cart " style="font-size: 20px;"></i></a>
+                  </div>
+                  {% endif %}
+                  </div>
+                
+                
+
+                <!-- <ul class="side-icons">
+                    <span><i class="fas fa-search"></i></span>
+                </ul> -->
+                </div>
+                <div class="bottom">
+                <a href="{% url 'App_Shop:product_detail' pk=product.pk %}" class="pro-name">{{product.name}}</a>
+                <div class="price">
+                    <span>&#2547; {{product.price|floatformat:2}}</span>
+                </div>
+                </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+         
+
+        </div>
+
+        <!-- PAGINATION -->
+        <!-- <ul class="pagination">
+          <span>1</span>
+          <span>2</span>
+          <span class="icon">››</span>
+          <span class="last">Last »</span>
+        </ul> -->
+      </div>
+    </div>
+  </section>
+{% endblock %}

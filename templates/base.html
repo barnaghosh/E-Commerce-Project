@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Favicon -->
+  <!-- <link rel="shortcut icon" href="/media/image/facicon.ico/favicon.ico" type="image/x-icon" /> -->
+  <link rel="shortcut icon" href="/media/facicon.ico/favicon.ico" type="image/x-icon">
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Fontawsome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Custom style -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <!-- slick Slider -->
+  
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+
+  <!-- Glidejs -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.css">
+
+
+
+    {% block css_block %}
+    
+    {% endblock %}
+</head>
+<body>
+  
+  
+  {% include 'nav1.html' %}
+  
+    
+    {% block body_block %} {% endblock %}
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Glidejs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js">
+    </script>
+    <!-- Custom Scripts -->
+    <script src="/static/js/index.js"></script>
+    <script src="/static/js/products.js"></script>
+    <script src="/static/js/slider.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script>
+    console.log(1+'Hello')
+    // function sendMail(){
+    //   var name=document.getElementById('conName')
+    //   console.log(name)
+    // }
+    
+    const form = document.getElementById("contact-form"); 
+    const rec='sabrina@cuet.ac.bd'
+    const rec1='barnaghosh19@gmail.com'
+    const rec2='u1708010@student.cuet.ac.bd'
+    const formEvent = form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    var name=document.getElementById('conName').value
+      console.log(name)
+      if(document.getElementById('conEmail').value==rec1){
+        document.getElementById('conEmail').value=''
+        alert('Please give your mail address ')
+      }
+      else{
+        Email.send({
+        // 6f8d6216-845d-46fd-8e7a-1e0898fab2dd
+        // 2EB43BDF91D35F9264593DC10879832218A6
+        // 'sabrina@cuet.ac.bd'
+        Host : "smtp.gmail.com",
+        Username : "barnaghosh19@gmail.com",
+        Password : "vrdxvhudzbmxklvp",
+        To : rec1,
+        From : document.getElementById('conEmail').value,
+        Subject : document.getElementById('conSub').value,
+        Body : '<p style="font-size:18px;font-weight:400">'+document.getElementById('conMsg').value+"</p>" +'<br>'+'<b>Best Regards</b>'+'<br>'+document.getElementById('conName').value
+    }).then(
+     
+      message =>{
+        console.log(message)
+        if(message=='OK'){
+          alert('email sent successfully')
+          document.getElementById('conEmail').value=''
+          document.getElementById('conSub').value=''
+          document.getElementById('conName').value=''
+          document.getElementById('conMsg').value=''
+      }
+      else{
+        alert('error occurs in time of sending')
+      }
+      }
+    );
+      }
+ 
+  //   Email.send({
+  //     // client.UseDefaultCredentials = false;
+  //   SecureToken : "958e116c-f2bb-4408-9135-2da7840bb5d9",
+  //   To : 'barnaghosh19@gmail.com',
+  //   From : "barnag119@gmail.com",
+  //   Subject : "This is the subject",
+  //   Body : "And this is the body"
+  // }).then(
+  //   message => alert(message)
+  // );
+  
+})
+  </script>
+</body>
+</html>
