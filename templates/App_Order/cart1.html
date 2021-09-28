@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
+{% block title_block %}
+Cart
+{% endblock %}
 {% block body_block %}
 <!-- <h1>Hello</h1> -->
 <div class="container">
   <div class="messages container ">
     {% if messages %}
       {% for message in messages %}
-        <div {% if message.tags %} class="alert alert-{{message.tags}}{% endif %}" role="alert">
+        <div {% if message.tags %} class="alert alert-{{message.tags}}{% endif %} mt-2" role="alert">
           {{message}} 
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
@@ -42,7 +45,7 @@
           <a class="mr-2" href="{% url 'App_Order:increase' pk=cart.item.pk %}"> <span class="badge badge-light"> <i class="fa fa-plus" aria-hidden="true"></i></span></a>
         </td>
         <td align="right">&#2547; {{cart.get_total}} <br>
-        {% if cart.cupon %} <span style="color: lightgray;font-size: 13px;font-weight: 900;">(cupon Price) </span> {% endif %}  
+        {% if cart.cupon %} <span style="color: maroon;font-size: 13px;font-weight: 900;">(cupon Price) </span> {% endif %}  
         </td>
         <td><a href="{% url 'App_Order:remove' pk=cart.item.pk %}" class="btn btn-danger btn-sm">Remove From Cart</a></td>
         {% if cart.item.cupon_number %}

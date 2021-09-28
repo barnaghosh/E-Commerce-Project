@@ -121,6 +121,15 @@ def order_view(request):
     else:
         messages.warning(request, "You do no have an active order")
         return HttpResponseRedirect(reverse('main'))
+
+@login_required
+def order_view_seller(request):
+    orders= Order.objects.filter(seller=request.user, ordered=True)
+    if orders.exists():
+        return render(request,'App_Payment/order.html',context={'orders':orders,'customer':'customerorder'})
+    else:
+        messages.warning(request, "You do no have an active order")
+        return HttpResponseRedirect(reverse('main'))
     # try:
     #     orders = Order.objects.filter(user=request.user, ordered=True)
     #     context = {"orders": orders}

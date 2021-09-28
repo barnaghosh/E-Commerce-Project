@@ -46,6 +46,39 @@ def add_to_cart(request, pk):
         messages.info(request, "This item was added to your cart.")
         return redirect("App_Shop:home_product")
 
+@login_required
+def cart_to_add(request, pk):
+    item = get_object_or_404(Product, pk=pk)
+    print("Item2")
+    print(item.seller)
+    order_item = Cart.objects.get_or_create(item=item, user=request.user, purchased=False,seller=item.seller)
+    print("Order Item Object:")
+    print(order_item)
+    print(order_item[0])
+    order_qs = Order.objects.filter(user=request.user,seller=item.seller , ordered=False)
+    print("Order Qs:")
+    print(order_qs)
+    #print(order_qs[0])
+    if order_qs.exists():
+        order = order_qs[0]
+        print("If Order exist")
+        print(order)
+        if order.orderitems.filter(item=item).exists():
+            order_item[0].quantity += 1
+            order_item[0].save()
+            messages.info(request, "This item quantity was updated.")
+            return redirect("App_Shop:products")
+        else:
+            order.orderitems.add(order_item[0])
+            messages.info(request, "This item was added to your cart.")
+            return redirect("App_Shop:products")
+    else:
+        order = Order(user=request.user)
+        order.seller=item.seller
+        order.save()
+        order.orderitems.add(order_item[0])
+        messages.info(request, "This item was added to your cart.")
+        return redirect("App_Shop:products")
 
 @login_required
 def cart_view(request):

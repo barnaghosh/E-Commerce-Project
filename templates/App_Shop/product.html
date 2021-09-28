@@ -19,7 +19,7 @@ Profile
   .addCart:hover{
     
     padding: 1rem 1.3rem;
-    background-color: black;
+    background-color: maroon;
   }
   .addCart:hover a i{
     /* border-radius: 10; */
@@ -91,7 +91,7 @@ Profile
                 </label>
               </li>
               <li>
-                <input type="checkbox" name="Jama" id="" value="Jama">
+                <input type="checkbox" name="Women Dress" id="" value="Women Dress">
                 <label for="">
                   <span>Dress</span>
                   <!-- <small>(10)</small> -->
@@ -129,6 +129,18 @@ Profile
       <div class="col-3-of-4">
 
         <div class="product-layout row" >
+          <div class="container">
+            <div class="messages container ">
+              {% if messages %}
+                {% for message in messages %}
+                  <div {% if message.tags %} class="alert mt-2 alert-{{message.tags}}{% endif %}" role="alert">
+                    {{message}} 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
           {% if product_search %}
           {% for product in product_search %}
             <div class="product col-sm-12 col-md-4 col-lg-3 ">
@@ -142,7 +154,7 @@ Profile
                   {% endif %}
                   {% if user.is_buyer %}
                     <div class="addCart rounded-circle" style="position: absolute;bottom:0;right: 0;">
-                      <a href="{% url 'App_Order:add' pk=product.pk %}" style="color: black;"><i class="fa fa-shopping-cart " style="font-size: 20px;"></i></a>
+                      <a href="{% url 'App_Order:addcart' pk=product.pk %}" style="color: black;"><i class="fa fa-shopping-cart " style="font-size: 20px;"></i></a>
                   </div>
                   {% endif %}
                   </div>
@@ -174,7 +186,7 @@ Profile
                   {% endif %}
                   {% if user.is_buyer %}
                     <div class="addCart rounded-circle" style="position: absolute;bottom:0;right: 0;">
-                      <a href="{% url 'App_Order:add' pk=product.pk %}" style="color: black;"><i class="fa fa-shopping-cart " style="font-size: 20px;"></i></a>
+                      <a href="{% url 'App_Order:addcart' pk=product.pk %}" style="color: black;"><i class="fa fa-shopping-cart " style="font-size: 20px;"></i></a>
                   </div>
                   {% endif %}
                   </div>

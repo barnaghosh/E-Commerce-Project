@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% block body_block %}
 <div class="container mt-5">
-  <h2 class="text-center"><strong>Your Orders</strong></h2>
+  <h2 class="text-center"><strong>{% if customer %}
+    Customer Orders
+  {% else %}
+   Your Orders
+  {% endif %}  </strong></h2>
   <div class="row">
     <div class="col-md-12">
       <div class="card mt-5" style="height:auto">
@@ -12,7 +16,11 @@
                 <th scope="col">#</th>
                 <th scope="col">Order Id</th>
                 <th scope="col">Products</th>
-                <th scope="col">Seller</th>
+                <th scope="col">{% if customer %}
+                  Buyer
+                {% else %}
+                Seller
+                {% endif %}  </th>
                 <th scope="col">Status</th>
               </tr>
             </thead>
@@ -24,8 +32,21 @@
                 <td>
                   {% for item in order.orderitems.all %} {{item}} <br> {% endfor %}
                 </td>
-                <td>{{order.seller}} </td>
-                <td><span class="badge badge-primary">Processing Your ORder</span></td>
+                <td>
+                {% if customer %}
+                {{order.user}}
+                {% else %}
+                {{order.seller}}
+                {% endif %}  
+                </td>
+                <td><span class="badge badge-primary">
+
+                  {% if customer %}
+                  Payment Done
+                {% else %}
+                Processing Your ORder
+                {% endif %}  
+                </span></td>
               </tr>
               {% endfor %}
             </tbody>

@@ -8,9 +8,9 @@ class Category(models.Model):
     title = models.CharField(max_length=20)
     seller=models.ForeignKey(User,on_delete=models.CASCADE,related_name='seller_cat',null=True)
     created = models.DateTimeField(auto_now_add=True)
-
+# +" "+ 'id:' + str(self.pk)
     def __str__(self):
-        return self.title +" "+ 'id:' + str(self.pk)
+        return self.title 
 
     class Meta:
         verbose_name_plural = "Categories"

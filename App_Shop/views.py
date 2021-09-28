@@ -27,6 +27,7 @@ def is_seller(user):
 def create_product(request,pk):
     category=Category.objects.get(pk=pk)
     form=ProductFormAnother()
+    print('Hello')
     if 'save' in request.POST:
         form=ProductFormAnother(request.POST,request.FILES)
         # print(form)
@@ -79,7 +80,7 @@ def create_category(request):
 @user_passes_test(is_seller)
 def create_another_product(request):
     catagory=Category.objects.all()
-    
+    print('Hello')
     if catagory.exists():
 
         form=ProductForm()

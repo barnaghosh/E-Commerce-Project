@@ -1,9 +1,47 @@
 {% extends 'base.html' %}
 {% block css_block %}
 <style>
-  .slider-two .product .site-btn:hover  .site-a {
+.site-slider-two {
+  position: relative;
+  height: 50%;
+  overflow: hidden;
+}
+
+.site-slider-two .product {
+  height: 25rem;
+  position: relative;
+  overflow: hidden;
+}
+.site-slider-two .product img {
+  width: 90%;
+  margin: auto;
+}
+.site-btn {
+  padding: 0.8rem 1.9rem;
+  border-radius: 4rem;
+  border: 1px solid #2b303218;
+  background-color: white;
+  color: var(--light-gray);
+}
+/* .site-btn:hover a {
+  text-decoration: none;
+  color: white;
+} */
+.site-btn a {
+  color: black;
+  text-decoration: none;
+}
+.site-btn:hover{
+  background-color: maroon;
   color: white;
 }
+.site-btn:hover a{
+  color: white;
+}
+/* .slider-two .slick-track .product:hover .site-btn span a {
+  background-color: maroon;
+  color: white;
+} */
 </style>
 {% endblock %}
 
@@ -53,28 +91,28 @@
         <div class="col-md-2 product pt-md-5 pt-5 ">
           <img src="/media/img/jama1.jpg" alt="" width="100%" height="200px">
           <span class="border site-btn btn-span" >
-           <a href="{% url 'App_Shop:also' pk=10 %}" class="site-a" style="color: black; ">Dress </a>  
+           <a href="{% url 'App_Shop:also' pk=10 %}" class="site-a" style="text-decoration: none; ">Dress </a>  
           </span>
         </div>
         <div class="col-md-2 product pt-md-5 pt-5 ">
           <img src="/media/img/bag6.jpg" alt="" width="100%" height="200px">
-          <span class="border site-btn btn-span" ><a href="{% url 'App_Shop:also' pk=5 %}" style="color: black;text-decoration: none;" >Bag </a></span>
+          <span class="border site-btn btn-span" ><a href="{% url 'App_Shop:also' pk=5 %}" style="text-decoration: none;" >Bag </a></span>
         </div>
         <div class="col-md-2 product pt-md-5 pt-5 ">
           <img src="/media/img/make2.jpg" alt="" width="100%" height="200px">
-          <span class="border site-btn btn-span" ><a href="{% url 'App_Shop:also' pk=11 %}" style="color: black;text-decoration: none;">Makeup Product </a></span>
+          <span class="border site-btn btn-span" ><a href="{% url 'App_Shop:also' pk=11 %}" style="text-decoration: none;">Makeup Product </a></span>
         </div>
         <div class="col-md-2 product pt-md-5 pt-5 ">
           <img src="/media/img/shirt2.jpg" alt="" width="100%" height="200px">
-          <span class="border site-btn btn-span" ><a href="{% url 'App_Shop:also' pk=6 %}" style="color: black;text-decoration: none;">T-Shirt </a></span>
+          <span class="border site-btn btn-span" ><a href="{% url 'App_Shop:also' pk=6 %}" style="text-decoration: none;">T-Shirt </a></span>
         </div>
         <div class="col-md-2 product pt-md-5 pt-5 ">
           <img src="/media/img/watch1.jpg" alt="" width="100%" height="200px">
-          <span class="border site-btn btn-span" > <a href="{% url 'App_Shop:also' pk=7 %}" style="color: black;text-decoration: none;">Watch </a> </span>
+          <span class="border site-btn btn-span" > <a href="{% url 'App_Shop:also' pk=7 %}" style="text-decoration: none;">Watch </a> </span>
         </div>
         <div class="col-md-2 product pt-md-5 pt-5 ">
           <img src="/media/img/leather1.jpg" alt="" width="100%" height="200px">
-          <span class="border site-btn btn-span" > <a href="{% url 'App_Shop:also' pk=8 %}" style="color: black;text-decoration: none;">Leather Belt </a> </span>
+          <span class="border site-btn btn-span" > <a href="{% url 'App_Shop:also' pk=8 %}" style="text-decoration: none;">Leather Belt </a> </span>
         </div>
         <!-- <div class="col-md-2 product pt-md-5 pt-5 ">
           <img src="/media/img/jama1.jpg" alt="" width="100%" height="200px">
@@ -96,17 +134,17 @@
     </div>
   </div>
   <div class="container" style="margin-top: 0px;">
-    <h3 style="text-align: center;">FEATURES PRODUCT</h3>
+    <h3 style="text-align: center;color: maroon;">FEATURES PRODUCT</h3>
     {% for cata in catagory %}
     {% if cata.category.all %}
     <div class="container my-5">
         <div class="row">
             <div class="col-6">
-                <h4 style="color: black;" >{{cata.title}} </h4>
+                <h4 style="color: maroon;" >{{cata.title}} </h4>
             </div>
             <div class="col-6">
                 {% if cata.category.count > 4 %}
-                    <p style="text-align: right;margin-bottom: 0px;color: maroon;"  ><a href="{% url 'App_Shop:also' pk=cata.pk %}" >See More </a></p>
+                    <p style="text-align: right;margin-bottom: 0px;color: maroon;"  ><a href="{% url 'App_Shop:also' pk=cata.pk %}" style="color: maroon;font-size: 18px;font-weight: 500;border: 2px solid maroon;" >See More </a></p>
                 {% endif %}
             </div>
             
@@ -223,7 +261,7 @@
               <span>
                 <i class="fa fa-envelope"></i>
               </span>
-              company@gmail.com
+              barnag119@gmail.com
             </a>
             
           </div>
